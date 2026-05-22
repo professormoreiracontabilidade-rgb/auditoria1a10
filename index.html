@@ -4,16 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz de Auditoria</title>
+
 <style>
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(180deg, #061a3a 0%, #082b66 48%, #0b3f91 100%);
   color: #102033;
 }
+
 .app {
   width: 100%;
   max-width: 430px;
@@ -21,6 +24,7 @@ body {
   margin: 0 auto;
   padding: 14px;
 }
+
 .header {
   background: linear-gradient(135deg, #031633, #0646a8, #0b64e6);
   color: white;
@@ -30,11 +34,13 @@ body {
   box-shadow: 0 12px 28px rgba(0,0,0,.25);
   margin-bottom: 14px;
 }
+
 .header h1 {
   margin: 0;
   font-size: 24px;
   letter-spacing: .3px;
 }
+
 .scoreboard {
   margin-top: 12px;
   background: rgba(255,255,255,.16);
@@ -44,6 +50,7 @@ body {
   font-weight: bold;
   font-size: 15px;
 }
+
 .timer {
   margin-top: 10px;
   background: #ffffff;
@@ -54,12 +61,48 @@ body {
   font-weight: bold;
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
 }
+
+.print-panel {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 12px;
+  margin: 14px 0;
+  box-shadow: 0 10px 22px rgba(0,0,0,.20);
+}
+
+.print-title {
+  color: #06357e;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.print-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.print-actions button {
+  border: 0;
+  border-radius: 16px;
+  padding: 12px 8px;
+  font-weight: bold;
+  font-size: 13px;
+  color: white;
+  background: linear-gradient(135deg, #7f1d1d, #991b1b);
+  box-shadow: 0 6px 14px rgba(127, 29, 29, .35);
+  cursor: pointer;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   margin: 14px 0;
 }
+
 .qbtn {
   border: 0;
   border-radius: 14px;
@@ -70,16 +113,20 @@ body {
   box-shadow: 0 6px 14px rgba(0,0,0,.18);
   cursor: pointer;
 }
+
 .qbtn.current {
   background: #0b64e6;
   outline: 3px solid rgba(255,255,255,.7);
 }
+
 .qbtn.correct {
   background: #16a34a;
 }
+
 .qbtn.wrong {
   background: #dc2626;
 }
+
 .card {
   background: #ffffff;
   border-radius: 26px;
@@ -87,6 +134,7 @@ body {
   box-shadow: 0 14px 30px rgba(0,0,0,.24);
   margin-bottom: 14px;
 }
+
 .meta {
   font-size: 13px;
   color: #0b4fb5;
@@ -96,13 +144,16 @@ body {
   padding: 10px;
   margin-bottom: 14px;
 }
+
 .question {
   font-size: 16px;
   line-height: 1.52;
 }
+
 .question p {
   margin: 10px 0;
 }
+
 .item {
   background: #eef7ff;
   border-left: 5px solid #0b64e6;
@@ -111,11 +162,13 @@ body {
   margin: 10px 0;
   line-height: 1.45;
 }
+
 .options {
   display: grid;
   gap: 10px;
   margin-top: 16px;
 }
+
 .option {
   width: 100%;
   text-align: left;
@@ -128,22 +181,26 @@ body {
   cursor: pointer;
   transition: .2s;
 }
+
 .option:hover {
   transform: translateY(-1px);
   border-color: #0b64e6;
 }
+
 .option.correct {
   background: #dcfce7;
   border-color: #16a34a;
   color: #14532d;
   font-weight: bold;
 }
+
 .option.wrong {
   background: #fee2e2;
   border-color: #dc2626;
   color: #7f1d1d;
   font-weight: bold;
 }
+
 .feedback {
   display: none;
   margin-top: 16px;
@@ -151,17 +208,21 @@ body {
   border-radius: 18px;
   line-height: 1.5;
 }
+
 .feedback.show {
   display: block;
 }
+
 .feedback.ok {
   background: #dcfce7;
   border-left: 6px solid #16a34a;
 }
+
 .feedback.bad {
   background: #fee2e2;
   border-left: 6px solid #dc2626;
 }
+
 .comment {
   margin-top: 12px;
   background: #f1f7ff;
@@ -170,11 +231,13 @@ body {
   border-radius: 16px;
   line-height: 1.55;
 }
+
 .nav {
   display: flex;
   gap: 10px;
   margin: 14px 0 18px;
 }
+
 .nav button {
   flex: 1;
   border: 0;
@@ -182,15 +245,18 @@ body {
   padding: 14px 10px;
   font-size: 15px;
   font-weight: bold;
-  color: white;
-  background: linear-gradient(135deg, #05357e, #0b64e6);
-  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+  color: #ffffff;
+  background: linear-gradient(135deg, #5b0b0b, #7f1d1d, #991b1b);
+  box-shadow: 0 8px 18px rgba(127, 29, 29, .35);
   cursor: pointer;
+  border: 1px solid rgba(255,255,255,.35);
 }
+
 .nav button:disabled {
   opacity: .45;
   cursor: not-allowed;
 }
+
 .footer {
   text-align: center;
   color: white;
@@ -202,12 +268,110 @@ body {
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
   margin-top: 18px;
 }
+
 .small {
   font-size: 13px;
   opacity: .9;
 }
+
+.print-area {
+  display: none;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black;
+  }
+
+  .app {
+    display: none !important;
+  }
+
+  .print-area {
+    display: block !important;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .print-header {
+    text-align: center;
+    border-bottom: 3px solid #0b3f91;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+
+  .print-header h1 {
+    font-size: 20px;
+    color: #0b3f91;
+    margin: 0 0 6px 0;
+  }
+
+  .print-header p {
+    margin: 3px 0;
+    font-size: 12px;
+  }
+
+  .print-question {
+    page-break-inside: avoid;
+    border: 1px solid #d7e5ff;
+    border-left: 5px solid #0b64e6;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 0 0 14px 0;
+  }
+
+  .print-meta {
+    font-size: 11px;
+    font-weight: bold;
+    color: #0b3f91;
+    margin-bottom: 8px;
+  }
+
+  .print-question p {
+    margin: 7px 0;
+    line-height: 1.35;
+  }
+
+  .print-question .item {
+    background: #eef7ff !important;
+    border-left: 4px solid #0b64e6;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 8px;
+  }
+
+  .print-options {
+    margin-top: 8px;
+  }
+
+  .print-options div {
+    margin: 5px 0;
+    font-size: 13px;
+  }
+
+  .answer-box {
+    margin-top: 10px;
+    padding: 9px;
+    background: #eef7ff !important;
+    border-radius: 8px;
+    border-left: 4px solid #16a34a;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .page-footer {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 20px;
+    color: #0b3f91;
+    font-weight: bold;
+  }
+}
 </style>
 </head>
+
 <body>
 <div class="app">
   <div class="header">
@@ -230,6 +394,14 @@ body {
     <button id="nextBtn" onclick="nextQuestion()">Próxima →</button>
   </div>
 
+  <div class="print-panel">
+    <div class="print-title">📄 Gerar material para impressão em PDF</div>
+    <div class="print-actions">
+      <button onclick="printPDF(true)">✅ PDF com respostas</button>
+      <button onclick="printPDF(false)">📝 PDF sem respostas</button>
+    </div>
+  </div>
+
   <div class="footer">
     <div style="font-size:18px;font-weight:bold;letter-spacing:.4px;margin-bottom:6px;">
       📘 CURSO DE CONTABILIDADE PROFESSOR MOREIRA
@@ -239,6 +411,8 @@ body {
     </div>
   </div>
 </div>
+
+<div class="print-area" id="printArea"></div>
 
 <script>
 const questions = [
@@ -510,6 +684,51 @@ function prevQuestion() {
     current--;
     renderQuestion();
   }
+}
+
+function printPDF(withAnswers) {
+  saveTime();
+
+  let html = `
+    <div class="print-header">
+      <h1>📘 Quiz de Auditoria</h1>
+      <p><strong>Curso de Contabilidade Professor Moreira</strong></p>
+      <p><strong>WhatsApp: (61) 98532-3574</strong></p>
+      <p>${withAnswers ? "Material com respostas e comentários" : "Material sem respostas"}</p>
+    </div>
+  `;
+
+  questions.forEach((q, index) => {
+    html += `
+      <div class="print-question">
+        <div class="print-meta">Questão ${index + 1} — ${q.meta}</div>
+        <div>${q.html}</div>
+        <div class="print-options">
+    `;
+
+    q.options.forEach((op, i) => {
+      html += `<div><strong>${String.fromCharCode(97 + i)})</strong> ${op}</div>`;
+    });
+
+    if (withAnswers) {
+      html += `
+        </div>
+        <div class="answer-box">
+          <strong>Gabarito:</strong> ${String.fromCharCode(97 + q.answer).toUpperCase()} — ${q.options[q.answer]}<br><br>
+          <strong>Comentário:</strong> ${q.comment}
+        </div>
+      `;
+    } else {
+      html += `</div>`;
+    }
+
+    html += `</div>`;
+  });
+
+  html += `<div class="page-footer">Curso de Contabilidade Professor Moreira • WhatsApp: (61) 98532-3574</div>`;
+
+  document.getElementById("printArea").innerHTML = html;
+  setTimeout(() => window.print(), 200);
 }
 
 window.addEventListener("beforeunload", saveTime);

@@ -1,268 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Auditoria</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(180deg,#061b35,#0b2e5f);
+  color:#102033;
+}
+
+.app{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding:14px;
+}
+
+.header{
+  color:white;
+  text-align:center;
+  background:linear-gradient(135deg,#003b8f,#0066ff);
+  border-radius:24px;
+  padding:20px 14px;
+  margin-bottom:12px;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size:24px;
+}
+
+.header p{
+  margin:0;
+  font-size:13px;
+}
+
+.score{
+  background:white;
+  border-radius:16px;
+  padding:10px;
+  text-align:center;
+  font-weight:bold;
+  color:#003b8f;
+  margin-bottom:12px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.grid button{
+  border:0;
+  border-radius:12px;
+  padding:10px 0;
+  background:#dce7ff;
+  color:#003b8f;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.grid button.active{
+  background:#003b8f;
+  color:white;
+}
+
+.grid button.correct{
+  background:#00a86b;
+  color:white;
+}
+
+.grid button.wrong{
+  background:#d93025;
+  color:white;
+}
+
+.card{
+  background:white;
+  border-radius:22px;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(0,0,0,.22);
+}
+
+.meta{
+  font-size:12px;
+  color:#41536b;
+  background:#edf4ff;
+  border-radius:12px;
+  padding:9px;
+  margin-bottom:12px;
+  line-height:1.45;
+}
+
+.qnum{
+  display:inline-block;
+  background:#003b8f;
+  color:white;
+  border-radius:999px;
+  padding:7px 12px;
+  font-weight:bold;
+  margin-bottom:14px;
+}
+
+.question{
+  font-size:15px;
+  line-height:1.7;
+}
+
+.roman{
+  background:#f7faff;
+  border-left:4px solid #0066ff;
+  border-radius:10px;
+  padding:12px;
+  margin:10px 0;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.options{
+  display:grid;
+  gap:8px;
+  margin-top:16px;
+}
+
+.option{
+  border:1px solid #d8e1ef;
+  border-radius:12px;
+  padding:12px;
+  background:#f6f8fb;
+  font-size:14px;
+  line-height:1.5;
+  cursor:pointer;
+}
+
+.option:hover{
+  background:#eaf2ff;
+}
+
+.option.correct{
+  background:#dff6e9;
+  border:2px solid #00a86b;
+}
+
+.option.wrong{
+  background:#fde2e0;
+  border:2px solid #d93025;
+}
+
+.feedback{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.feedback.show{
+  display:block;
+}
+
+.feedback.correct{
+  background:#dff6e9;
+  border:1px solid #00a86b;
+}
+
+.feedback.wrong{
+  background:#fde2e0;
+  border:1px solid #d93025;
+}
+
+.nav{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+}
+
+.nav button{
+  flex:1;
+  border:0;
+  border-radius:14px;
+  padding:13px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.prev{
+  background:#dce7ff;
+  color:#003b8f;
+}
+
+.next{
+  background:#00a86b;
+  color:white;
+}
+
+.footer{
+  text-align:center;
+  color:white;
+  font-size:12px;
+  padding:20px 4px 28px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="header">
+  <h1>📘 Quiz de Auditoria</h1>
+  <p>NBC TA 230 – Documentação de Auditoria</p>
+</div>
+
+<div class="score" id="score">
+Acertos: 0 | Erros: 0
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="card">
+
+<div class="meta" id="meta"></div>
+
+<div class="qnum" id="qnum"></div>
+
+<div class="question" id="question"></div>
+
+<div class="options" id="options"></div>
+
+<div class="feedback" id="feedback"></div>
+
+<div class="nav">
+  <button class="prev" onclick="prevQuestion()">← Voltar</button>
+  <button class="next" onclick="nextQuestion()">Próxima →</button>
+</div>
+
+</div>
+
+<div class="footer">
+Curso de Contabilidade Professor Moreira
+</div>
+
+</div>
+
 <script>
+
 const questions = [
+
 {
 meta:"FGV - ACE (TCE RR)/TCE RR/Ciências Atuariais/2025",
-intro:"Sobre a documentação de auditoria, considere as afirmativas a seguir:",
-items:[
-"I. Deve incluir uma estratégia de auditoria e um plano de auditoria.",
-"II. Deve ser suficientemente detalhada para permitir a um auditor experiente entender a natureza, a época, o escopo e os resultados dos procedimentos executados.",
-"III. Deve registrar os procedimentos executados e a evidência obtida e apoiar a comunicação dos resultados da auditoria."
+
+html:`
+<p>
+Sobre a documentação de auditoria, considere as afirmativas:
+</p>
+
+<div class="roman">
+<b>I.</b> Deve incluir uma estratégia de auditoria e um plano de auditoria.
+</div>
+
+<div class="roman">
+<b>II.</b> Deve ser suficientemente detalhada para permitir a um auditor experiente entender a natureza, a época, o escopo e os resultados dos procedimentos executados.
+</div>
+
+<div class="roman">
+<b>III.</b> Deve registrar os procedimentos executados e a evidência obtida e apoiar a comunicação dos resultados da auditoria.
+</div>
+
+<p>
+Está correto o que se afirma em:
+</p>
+`,
+
+options:[
+"I, II e III.",
+"II e III, apenas.",
+"I, apenas.",
+"I e III, apenas.",
+"II, apenas."
 ],
-ask:"Está correto o que se afirma em:",
-options:["I, II e III.","II e III, apenas.","I, apenas.","I e III, apenas.","II, apenas."],
+
 answer:0,
+
 comment:"Todas estão corretas. A documentação deve registrar planejamento, procedimentos, evidências e conclusões."
-},
-{
-meta:"FGV - ACE (TCE RR)/TCE RR/Controle Externo/2025",
-intro:"Quanto à documentação de auditoria, analise as afirmações a seguir:",
-items:[
-"I. Trata-se do registro dos procedimentos de auditoria executados, da evidência de auditoria relevante obtida e das conclusões alcançadas pelo auditor.",
-"II. O auditor deve preparar documentação suficiente para que um auditor experiente entenda a natureza, época e extensão dos procedimentos, os resultados e os assuntos significativos.",
-"III. Ao documentar a natureza, a época e a extensão dos procedimentos, o auditor deve registrar as características que identificam os itens ou assuntos específicos testados."
-],
-ask:"Está correto o que se afirma em:",
-options:["I, apenas.","I e II, apenas.","II e III, apenas.","I e III, apenas.","I, II e III."],
-answer:4,
-comment:"As três afirmativas estão corretas conforme a NBC TA 230."
-},
-{
-meta:"FGV - CNAI (CFC)/CFC/QTG/2025",
-intro:"De acordo com a NBC TA 230 (R1) – Documentação de Auditoria, é correto afirmar que:",
-items:[],
-ask:"",
-options:[
-"Assim que a montagem do arquivo final de auditoria for completada, o auditor deve apagar e descartar a documentação de auditoria.",
-"Se o auditor julgar necessário indicar que não houve atendimento de um requisito específico de uma norma, ele deve abster-se de emitir uma opinião em seu relatório.",
-"Se o auditor executar procedimentos novos ou adicionais ou chegar a outras conclusões após a data do relatório, deve recomeçar o seu trabalho do início.",
-"Se o auditor identificar informações referentes a um assunto significativo que são inconsistentes com a sua conclusão final, ele deve documentar como tratou essa inconsistência.",
-"O auditor deve montar a documentação em arquivo de auditoria e completar o processo administrativo de montagem do arquivo final antes da data do relatório do auditor."
-],
-answer:3,
-comment:"O auditor deve documentar como tratou inconsistências relevantes com sua conclusão final."
-},
-{
-meta:"FGV - Ana GM (Pref SJC)/Pref SJC/Ciências Contábeis/2025",
-intro:"Em relação à documentação de auditoria, corresponde à documentação de auditoria o registro dos seguintes itens:",
-items:[
-"I. Procedimentos de auditoria executados.",
-"II. Evidência de auditoria relevante obtida.",
-"III. Conclusões alcançadas pelo auditor."
-],
-ask:"Está correto o que se apresenta em:",
-options:["I, apenas.","I e II, apenas.","I e III, apenas.","II e III, apenas.","I, II e III."],
-answer:4,
-comment:"Documentação de auditoria é o registro dos procedimentos executados, da evidência relevante obtida e das conclusões alcançadas."
-},
-{
-meta:"FGV - CNAI (CFC)/CFC/QTG/2025",
-intro:"À luz da NBC TA 230, avalie se os seguintes itens são documentos de auditoria:",
-items:[
-"I. Programas de auditoria.",
-"II. Explicações verbais.",
-"III. Memorandos de assuntos do trabalho.",
-"IV. Cartas de confirmação e representação."
-],
-ask:"São documentos de auditoria:",
-options:["I e II, apenas.","III e IV, apenas.","I, II e III, apenas.","I, III e IV, apenas.","I, II, III e IV."],
-answer:3,
-comment:"Explicações verbais, por si só, não representam documentação adequada. Programas, memorandos e cartas são documentos."
-},
-{
-meta:"FGV - CNAI (CFC)/CFC/QTG/2025",
-intro:"Com base na NBC TA 300 (R1), acerca do planejamento da auditoria, avalie as afirmativas a seguir:",
-items:[
-"I. O planejamento da auditoria deve incluir a consideração da materialidade e dos fatores que possam afetar os riscos de distorção relevante.",
-"II. O auditor deve revisar continuamente a estratégia global e o plano de auditoria ao longo do trabalho.",
-"III. O planejamento da auditoria deve ser documentado, sem haver exigência normativa para que ele seja atualizado caso ocorram mudanças significativas no risco identificado.",
-"IV. A estratégia global da auditoria deve abordar a supervisão dos membros da equipe."
-],
-ask:"Está correto o que se afirma em:",
-options:["I e III, apenas.","III e IV, apenas.","I, II e IV, apenas.","II, III e IV, apenas.","I, II, III e IV."],
-answer:2,
-comment:"A III está errada. Mudanças significativas devem ser refletidas e documentadas."
-},
-{
-meta:"FGV - Ana GM (Pref SJC)/Pref SJC/Ciências Contábeis/2024",
-intro:"Na auditoria das demonstrações contábeis, as alternativas a seguir representam documentação de auditoria adequada para o trabalho executado pelo auditor ou para as conclusões obtidas, com exceção de uma. Assinale-a.",
-items:[],
-ask:"",
-options:[
-"Análises.",
-"Explicações verbais do auditor.",
-"Resumos de assuntos significativos.",
-"Memorandos de assuntos do trabalho.",
-"Correspondência eletrônica referente a assuntos significativos."
-],
-answer:1,
-comment:"Explicações verbais podem esclarecer documentos, mas isoladamente não são documentação adequada."
-},
-{
-meta:"FGV - Cons Leg (CM SP)/CM SP/Contador/2024",
-intro:"Considerando as orientações da NBC TA 230 sobre a documentação de auditoria, assinale a afirmativa correta.",
-items:[],
-ask:"",
-options:[
-"Não se exige a documentação de informações referentes a assuntos significativos inconsistentes com a conclusão final do auditor.",
-"O auditor pode deixar de atender a um requisito relevante de uma norma de auditoria desde que documente os procedimentos alternativos executados para cumprir a finalidade desse requisito.",
-"Após a data do relatório, o auditor não poderá executar procedimentos novos ou adicionais que possam alterar a sua conclusão.",
-"A documentação da auditoria compreende uma ou mais pastas ou outras formas de armazenamento.",
-"É vedado ao profissional de auditoria modificar a documentação existente ou acrescentar novas documentações após a montagem do respectivo arquivo final."
-],
-answer:1,
-comment:"Em circunstâncias excepcionais, procedimentos alternativos podem cumprir a finalidade do requisito, desde que documentados."
-},
-{
-meta:"FGV - Cons Leg (CM SP)/CM SP/Contador/2024",
-intro:"Sobre a documentação dos procedimentos de auditoria executados e da evidência de auditoria obtida, avalie as afirmativas a seguir:",
-items:[
-"I. Explicações verbais do auditor, por si só, representam documentação adequada para o trabalho executado.",
-"II. O ceticismo profissional do auditor pode não ser passível de documentação; a documentação de auditoria, não obstante, pode fornecer evidências do exercício do ceticismo profissional.",
-"III. Uma das críticas às normas de auditoria é que elas não exigem a documentação das decisões profissionais tomadas pelo auditor, ainda que significativas."
-],
-ask:"Está correto o que se afirma em:",
-options:["II e III, apenas.","I, II e III.","III, apenas.","II, apenas.","I e III, apenas."],
-answer:3,
-comment:"Somente a II está correta. Explicações verbais isoladas não bastam e julgamentos significativos devem ser documentados."
-},
-{
-meta:"FGV - ACP (CGE PB)/CGE PB/Auditoria Governamental/2024",
-intro:"Um auditor preparou planilha, gráficos e tabelas sumarizadas para auxiliar na definição dos procedimentos seguintes. Esses papéis de trabalho possuem natureza:",
-items:[],
-ask:"",
-options:["Analítica.","Eventual.","Conclusiva.","Fiscalizatória.","Comprobatória."],
-answer:0,
-comment:"Planilhas, gráficos e tabelas usados para análise e definição de procedimentos possuem natureza analítica."
 }
+
 ];
 
 let current = 0;
+
 let userAnswers = Array(questions.length).fill(null);
 
 function renderGrid(){
+
   const grid = document.getElementById("grid");
+
   grid.innerHTML = "";
 
   questions.forEach((q,i)=>{
+
     const btn = document.createElement("button");
+
     btn.textContent = i+1;
 
-    if(i === current) btn.classList.add("active");
+    if(i === current){
+      btn.classList.add("active");
+    }
 
     if(userAnswers[i] !== null){
+
       if(userAnswers[i] === q.answer){
         btn.classList.add("correct");
       }else{
         btn.classList.add("wrong");
       }
+
     }
 
-    btn.onclick = () => {
+    btn.onclick = ()=>{
+
       current = i;
+
       renderQuestion();
+
     };
 
     grid.appendChild(btn);
+
   });
+
 }
 
 function renderQuestion(){
+
   const q = questions[current];
 
   document.getElementById("meta").textContent = q.meta;
-  document.getElementById("qnum").textContent = "Questão " + (current+1);
 
-  let html = "";
-  html += "<p>" + q.intro + "</p>";
+  document.getElementById("qnum").textContent =
+  "Questão " + (current+1);
 
-  if(q.items.length > 0){
-    q.items.forEach(item=>{
-      html += "<div class='roman'>" + item + "</div>";
-    });
-  }
-
-  if(q.ask){
-    html += "<p><b>" + q.ask + "</b></p>";
-  }
-
-  document.getElementById("question").innerHTML = html;
+  document.getElementById("question").innerHTML =
+  q.html;
 
   const optionsDiv = document.getElementById("options");
+
   optionsDiv.innerHTML = "";
 
   q.options.forEach((op,i)=>{
+
     const div = document.createElement("div");
+
     div.className = "option";
-    div.textContent = String.fromCharCode(97+i) + ") " + op;
+
+    div.innerHTML =
+    "<b>" + String.fromCharCode(97+i) + ")</b> " + op;
 
     if(userAnswers[current] !== null){
-      if(i === q.answer) div.classList.add("correct");
-      if(i === userAnswers[current] && i !== q.answer) div.classList.add("wrong");
+
+      if(i === q.answer){
+        div.classList.add("correct");
+      }
+
+      if(i === userAnswers[current] && i !== q.answer){
+        div.classList.add("wrong");
+      }
+
     }
 
-    div.onclick = () => selectAnswer(i);
+    div.onclick = ()=>selectAnswer(i);
+
     optionsDiv.appendChild(div);
+
   });
 
   showFeedback();
+
   renderGrid();
+
   updateScore();
+
 }
 
 function selectAnswer(i){
+
   userAnswers[current] = i;
+
   renderQuestion();
+
 }
 
 function showFeedback(){
+
   const fb = document.getElementById("feedback");
+
   const q = questions[current];
 
   if(userAnswers[current] === null){
+
     fb.className = "feedback";
+
     fb.innerHTML = "";
+
     return;
+
   }
 
   if(userAnswers[current] === q.answer){
+
     fb.className = "feedback show correct";
-    fb.innerHTML = "<b>✅ Você acertou!</b><br>" + q.comment;
+
+    fb.innerHTML =
+    "<b>✅ Você acertou!</b><br><br>" + q.comment;
+
   }else{
+
     fb.className = "feedback show wrong";
-    fb.innerHTML = "<b>❌ Você errou.</b><br>Resposta correta: <b>" +
-    String.fromCharCode(97+q.answer) + ") " + q.options[q.answer] +
-    "</b><br>" + q.comment;
+
+    fb.innerHTML =
+    "<b>❌ Você errou.</b><br><br>" +
+    "Resposta correta: <b>" +
+    String.fromCharCode(97+q.answer) +
+    ") " +
+    q.options[q.answer] +
+    "</b><br><br>" +
+    q.comment;
+
   }
+
 }
 
 function updateScore(){
+
   let acertos = 0;
+
   let erros = 0;
 
   userAnswers.forEach((ans,i)=>{
+
     if(ans !== null){
-      if(ans === questions[i].answer) acertos++;
-      else erros++;
+
+      if(ans === questions[i].answer){
+        acertos++;
+      }else{
+        erros++;
+      }
+
     }
+
   });
 
   document.getElementById("score").textContent =
   "Acertos: " + acertos + " | Erros: " + erros;
+
 }
 
 function nextQuestion(){
+
   if(current < questions.length-1){
+
     current++;
+
     renderQuestion();
+
   }
+
 }
 
 function prevQuestion(){
+
   if(current > 0){
+
     current--;
+
     renderQuestion();
+
   }
+
 }
 
 renderQuestion();
+
 </script>
+
+</body>
+</html>

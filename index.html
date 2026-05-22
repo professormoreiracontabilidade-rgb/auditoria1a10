@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz NBC TA 230</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(180deg,#061b35,#0b2e5f);
+}
+.app{
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+  padding:14px;
+}
+.header{
+  color:white;
+  text-align:center;
+  background:linear-gradient(135deg,#003b8f,#0066ff);
+  border-radius:24px;
+  padding:22px 16px;
+  margin-bottom:16px;
+}
+.header h1{font-size:24px;margin:0 0 8px}
+.header p{font-size:14px;margin:0}
+.card{
+  background:white;
+  border-radius:22px;
+  padding:18px;
+  margin:14px 0;
+  box-shadow:0 6px 18px rgba(0,0,0,.22);
+}
+.meta{
+  font-size:12px;
+  color:#41536b;
+  background:#edf4ff;
+  border-radius:12px;
+  padding:9px;
+  margin-bottom:12px;
+  line-height:1.45;
+}
+.qnum{
+  display:inline-block;
+  background:#003b8f;
+  color:white;
+  border-radius:999px;
+  padding:7px 12px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+.question{
+  font-size:15px;
+  line-height:1.55;
+  margin:8px 0 12px;
+}
+.roman{
+  background:#f7faff;
+  border-left:4px solid #0066ff;
+  border-radius:10px;
+  padding:10px 12px;
+  margin:9px 0;
+  font-size:14px;
+  line-height:1.5;
+}
+.options{
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+.option{
+  background:#f6f8fb;
+  border:1px solid #d8e1ef;
+  border-radius:12px;
+  padding:10px;
+  font-size:14px;
+  line-height:1.4;
+}
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:13px;
+  margin-top:14px;
+  background:#00a86b;
+  color:white;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.answer{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  background:#fff7df;
+  border:1px solid #f1d27a;
+  border-radius:16px;
+  line-height:1.55;
+  font-size:14px;
+}
+.answer strong{color:#8a5a00}
+.footer{
+  text-align:center;
+  color:white;
+  font-size:12px;
+  padding:18px 4px 28px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<div class="header">
+  <h1>📘 Quiz de Auditoria</h1>
+  <p>NBC TA 230 (R1) – Documentação de Auditoria</p>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - ACE (TCE RR)/TCE RR/Ciências Atuariais/2025</div>
+  <div class="qnum">Questão 1</div>
+  <div class="question">Sobre a documentação de auditoria, considere as afirmativas a seguir:</div>
+
+  <div class="roman"><b>I.</b> Deve incluir uma estratégia de auditoria e um plano de auditoria.</div>
+  <div class="roman"><b>II.</b> Deve ser suficientemente detalhada para permitir a um auditor experiente entender a natureza, a época, o escopo e os resultados dos procedimentos executados.</div>
+  <div class="roman"><b>III.</b> Deve registrar os procedimentos executados e a evidência obtida e apoiar a comunicação dos resultados da auditoria.</div>
+
+  <div class="question">Está correto o que se afirma em:</div>
+  <div class="options">
+    <div class="option">a) I, II e III.</div>
+    <div class="option">b) II e III, apenas.</div>
+    <div class="option">c) I, apenas.</div>
+    <div class="option">d) I e III, apenas.</div>
+    <div class="option">e) II, apenas.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: A.</strong><br>Todas estão corretas. A documentação deve registrar o planejamento, os procedimentos executados, as evidências obtidas e permitir que auditor experiente compreenda o trabalho realizado.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - ACE (TCE RR)/TCE RR/Controle Externo/2025</div>
+  <div class="qnum">Questão 2</div>
+
+  <div class="question">Quanto à documentação de auditoria, analise as afirmações a seguir.</div>
+
+  <div class="roman"><b>I.</b> Trata-se do registro dos procedimentos de auditoria executados, da evidência de auditoria relevante obtida e das conclusões alcançadas pelo auditor.</div>
+  <div class="roman"><b>II.</b> O auditor deve preparar documentação suficiente para que um auditor experiente entenda a natureza, época e extensão dos procedimentos, os resultados e os assuntos significativos.</div>
+  <div class="roman"><b>III.</b> O auditor deve registrar as características que identificam os itens ou assuntos específicos testados.</div>
+
+  <div class="question">Está correto o que se afirma em:</div>
+  <div class="options">
+    <div class="option">a) I, apenas.</div>
+    <div class="option">b) I e II, apenas.</div>
+    <div class="option">c) II e III, apenas.</div>
+    <div class="option">d) I e III, apenas.</div>
+    <div class="option">e) I, II e III.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: E.</strong><br>As três afirmativas estão corretas e correspondem à NBC TA 230.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - CNAI (CFC)/CFC/QTG/2025</div>
+  <div class="qnum">Questão 3</div>
+
+  <div class="question">De acordo com a NBC TA 230 (R1), é correto afirmar que:</div>
+
+  <div class="options">
+    <div class="option">a) Após a montagem do arquivo final, o auditor deve apagar e descartar a documentação.</div>
+    <div class="option">b) Se não atender a requisito específico, deve abster-se de emitir opinião.</div>
+    <div class="option">c) Se executar procedimentos novos após a data do relatório, deve recomeçar o trabalho do início.</div>
+    <div class="option">d) Se identificar informação significativa inconsistente com sua conclusão final, deve documentar como tratou essa inconsistência.</div>
+    <div class="option">e) Deve completar o arquivo final antes da data do relatório.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: D.</strong><br>A NBC TA 230 exige que o auditor documente como tratou inconsistências relevantes com sua conclusão final.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - Ana GM (Pref SJC)/Pref SJC/Ciências Contábeis/2025</div>
+  <div class="qnum">Questão 4</div>
+
+  <div class="question">Corresponde à documentação de auditoria o registro dos seguintes itens:</div>
+
+  <div class="roman"><b>I.</b> Procedimentos de auditoria executados.</div>
+  <div class="roman"><b>II.</b> Evidência de auditoria relevante obtida.</div>
+  <div class="roman"><b>III.</b> Conclusões alcançadas pelo auditor.</div>
+
+  <div class="options">
+    <div class="option">a) I, apenas.</div>
+    <div class="option">b) I e II, apenas.</div>
+    <div class="option">c) I e III, apenas.</div>
+    <div class="option">d) II e III, apenas.</div>
+    <div class="option">e) I, II e III.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: E.</strong><br>Documentação de auditoria é o registro dos procedimentos executados, da evidência relevante obtida e das conclusões alcançadas.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - CNAI (CFC)/CFC/QTG/2025</div>
+  <div class="qnum">Questão 5</div>
+
+  <div class="question">Avalie se os seguintes itens são documentos de auditoria:</div>
+
+  <div class="roman"><b>I.</b> Programas de auditoria.</div>
+  <div class="roman"><b>II.</b> Explicações verbais.</div>
+  <div class="roman"><b>III.</b> Memorandos de assuntos do trabalho.</div>
+  <div class="roman"><b>IV.</b> Cartas de confirmação e representação.</div>
+
+  <div class="options">
+    <div class="option">a) I e II, apenas.</div>
+    <div class="option">b) III e IV, apenas.</div>
+    <div class="option">c) I, II e III, apenas.</div>
+    <div class="option">d) I, III e IV, apenas.</div>
+    <div class="option">e) I, II, III e IV.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: D.</strong><br>Programas, memorandos, cartas de confirmação e representação são documentos de auditoria. Explicações verbais, por si só, não são documentação adequada.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - CNAI (CFC)/CFC/QTG/2025</div>
+  <div class="qnum">Questão 6</div>
+
+  <div class="question">Com base na NBC TA 300 (R1), avalie as afirmativas:</div>
+
+  <div class="roman"><b>I.</b> O planejamento deve considerar materialidade e fatores que possam afetar os riscos de distorção relevante.</div>
+  <div class="roman"><b>II.</b> O auditor deve revisar continuamente a estratégia global e o plano de auditoria.</div>
+  <div class="roman"><b>III.</b> O planejamento deve ser documentado, sem exigência de atualização em caso de mudanças significativas.</div>
+  <div class="roman"><b>IV.</b> A estratégia global deve abordar supervisão dos membros da equipe.</div>
+
+  <div class="options">
+    <div class="option">a) I e III, apenas.</div>
+    <div class="option">b) III e IV, apenas.</div>
+    <div class="option">c) I, II e IV, apenas.</div>
+    <div class="option">d) II, III e IV, apenas.</div>
+    <div class="option">e) I, II, III e IV.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: C.</strong><br>I, II e IV estão corretas. A III está errada, pois mudanças significativas devem ser refletidas e documentadas.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - Ana GM (Pref SJC)/Pref SJC/Ciências Contábeis/2024</div>
+  <div class="qnum">Questão 7</div>
+
+  <div class="question">As alternativas representam documentação de auditoria adequada, com exceção de uma. Assinale-a.</div>
+
+  <div class="options">
+    <div class="option">a) Análises.</div>
+    <div class="option">b) Explicações verbais do auditor.</div>
+    <div class="option">c) Resumos de assuntos significativos.</div>
+    <div class="option">d) Memorandos de assuntos do trabalho.</div>
+    <div class="option">e) Correspondência eletrônica referente a assuntos significativos.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: B.</strong><br>Explicações verbais podem esclarecer informações documentadas, mas, sozinhas, não constituem documentação adequada.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - Cons Leg (CM SP)/CM SP/Contador/2024</div>
+  <div class="qnum">Questão 8</div>
+
+  <div class="question">Considerando a NBC TA 230, assinale a afirmativa correta.</div>
+
+  <div class="options">
+    <div class="option">a) Não se exige documentação de informações significativas inconsistentes com a conclusão final.</div>
+    <div class="option">b) O auditor pode deixar de atender a requisito relevante desde que documente os procedimentos alternativos executados para cumprir a finalidade desse requisito.</div>
+    <div class="option">c) Após a data do relatório, o auditor não poderá executar procedimentos novos ou adicionais.</div>
+    <div class="option">d) A documentação da auditoria compreende uma ou mais pastas ou formas de armazenamento.</div>
+    <div class="option">e) É vedado modificar ou acrescentar documentação após a montagem do arquivo final.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: B.</strong><br>Se deixar de cumprir requisito relevante, o auditor deve documentar como procedimentos alternativos cumpriram a finalidade desse requisito.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - Cons Leg (CM SP)/CM SP/Contador/2024</div>
+  <div class="qnum">Questão 9</div>
+
+  <div class="question">Avalie as afirmativas:</div>
+
+  <div class="roman"><b>I.</b> Explicações verbais do auditor, por si só, representam documentação adequada.</div>
+  <div class="roman"><b>II.</b> O ceticismo profissional pode não ser passível de documentação; ainda assim, a documentação pode fornecer evidências do seu exercício.</div>
+  <div class="roman"><b>III.</b> As normas não exigem documentação das decisões profissionais significativas.</div>
+
+  <div class="options">
+    <div class="option">a) II e III, apenas.</div>
+    <div class="option">b) I, II e III.</div>
+    <div class="option">c) III, apenas.</div>
+    <div class="option">d) II, apenas.</div>
+    <div class="option">e) I e III, apenas.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: D.</strong><br>A I está errada porque explicações verbais isoladas não são documentação adequada. A II está correta. A III está errada porque julgamentos profissionais significativos devem ser documentados.</div>
+</div>
+
+<div class="card">
+  <div class="meta">FGV - ACP (CGE PB)/CGE PB/Auditoria Governamental/2024</div>
+  <div class="qnum">Questão 10</div>
+
+  <div class="question">Planilha, gráficos e tabelas sumarizadas preparados para auxiliar na definição dos procedimentos seguintes possuem natureza:</div>
+
+  <div class="options">
+    <div class="option">a) Analítica.</div>
+    <div class="option">b) Eventual.</div>
+    <div class="option">c) Conclusiva.</div>
+    <div class="option">d) Fiscalizatória.</div>
+    <div class="option">e) Comprobatória.</div>
+  </div>
+
+  <button onclick="toggleAnswer(this)">Ver resposta</button>
+  <div class="answer"><strong>Gabarito: A.</strong><br>Planilhas, gráficos e tabelas usados para análise e definição de procedimentos possuem natureza analítica.</div>
+</div>
+
+<div class="footer">
+  Curso de Contabilidade Professor Moreira<br>
+  Quiz em HTML responsivo para celular
+</div>
+
+</div>
+
+<script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  if(ans.style.display === "block"){
+    ans.style.display = "none";
+    btn.textContent = "Ver resposta";
+  }else{
+    ans.style.display = "block";
+    btn.textContent = "Ocultar resposta";
+  }
+}
+</script>
+
+</body>
+</html>
